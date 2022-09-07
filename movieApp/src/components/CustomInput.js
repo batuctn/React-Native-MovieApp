@@ -2,7 +2,16 @@ import {StyleSheet} from 'react-native';
 import React from 'react';
 import {TextInput} from 'react-native-paper';
 
-const CustomInput = ({value, label, left, onChangeText}) => {
+const CustomInput = ({
+  value,
+  label,
+  left,
+  onChangeText,
+  disabled,
+  placeholder,
+  secureTextEntry,
+  right,
+}) => {
   return (
     <TextInput
       mode="outlined"
@@ -14,6 +23,10 @@ const CustomInput = ({value, label, left, onChangeText}) => {
       maxLength={10}
       style={styles.textInput}
       left={left}
+      disabled={disabled}
+      placeholder={placeholder}
+      secureTextEntry={secureTextEntry}
+      right={right}
     />
   );
 };
