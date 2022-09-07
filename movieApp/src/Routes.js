@@ -10,6 +10,7 @@ function Router() {
       <NavigationContainer>
         <AuthNavigaiton />
         {/* <MovieNavigaiton /> */}
+        {/* {user ? <MovieNavigaiton /> : <AuthNavigaiton />} */}
       </NavigationContainer>
     </SafeAreaProvider>
   );
