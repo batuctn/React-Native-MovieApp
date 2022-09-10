@@ -30,7 +30,7 @@
 
 
 
-[Demo Link](https://www.veed.io/view/09829bcc-fbb2-4923-a5b5-09bad2643e28/Android%20Emulator%20-%20Pixel_3a_API_29_5554%202022-09-10%2005-07-00.mp4) <br/>
+[Demo Link](https://vimeo.com/manage/videos/748271628/privacy) <br/>
 
 
 
