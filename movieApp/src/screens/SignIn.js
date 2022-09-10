@@ -1,42 +1,79 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {TextInput} from 'react-native-paper';
 import {View, StyleSheet, Pressable, Text} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import CustomInput from '../components/CustomInput';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import CustomButton from '../components/CustomButton';
+import {useDispatch} from 'react-redux';
+import {setUser} from '../store';
+import CustomInput from '../components/CustomInput';
 
 const SignIn = () => {
+  const dispatch = useDispatch();
   const [userTeam, setUserTeam] = useState({
-    userName: '',
+    username: '',
     password: '',
   });
   const {navigate} = useNavigation();
   const [showPassword, setShowPassword] = useState(true);
 
   const handleLogin = async () => {
-    try {
-      const response = await axios.post(
-        'http://10.110.213.34:9090/users/login',
-        userTeam,
-      );
+    await axios
+      .get('http://10.0.2.2:3000/register')
+      .then(res => {
+        res.data.map(item => {
+          if (
+            item.username === userTeam.username &&
+            item.password === userTeam.password
+          ) {
+            AsyncStorage.setItem('userStorage', JSON.stringify(item));
+            AsyncStorage.getItem('userStorage').then(parserespo => {
+              const parsedata = JSON.parse(parserespo);
+              console.log('parserespo', parserespo);
 
-      AsyncStorage.setItem('user', JSON.stringify(response.data));
-      AsyncStorage.setItem('userId', JSON.stringify(response.data.id));
-      console.warn('Hoşgeldiniz');
-      navigate('Home');
-    } catch (error) {
-      console.warn(error);
-    }
+              dispatch(
+                setUser({
+                  username: parsedata.username,
+                  password: parsedata.password,
+                  mail: parsedata.mail,
+                  id: parsedata.id,
+                }),
+              );
+            });
+          }
+        });
+      })
+      .catch(err => console.log(err));
   };
+
+  useEffect(() => {
+    AsyncStorage.getItem('userStorage')
+      .then(parserespo => {
+        const parsedata = JSON.parse(parserespo);
+        console.log('parserespo', parserespo);
+
+        dispatch(
+          setUser({
+            username: parsedata.username,
+            password: parsedata.password,
+            mail: parsedata.mail,
+            id: parsedata.id,
+          }),
+        );
+      })
+      .catch(err => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <View style={styles.view}>
       <CustomInput
         placeholder="Username"
-        value={userTeam.userName}
+        value={userTeam.username}
         onChangeText={text => {
-          setUserTeam({...userTeam, userName: text});
+          setUserTeam({...userTeam, username: text});
         }}
         right={<TextInput.Icon name="account" color={'black'} />}
       />

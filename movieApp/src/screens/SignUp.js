@@ -8,7 +8,7 @@ import CustomButton from '../components/CustomButton';
 
 const SignUp = () => {
   const [checked, setChecked] = useState(false);
-  const [checkedPassword, setCheckedPassword] = useState(false);
+
   const [showPassword, setShowPassword] = useState(true);
   const [registerTeam, setRegisterTeam] = useState({
     mail: '',
@@ -18,19 +18,26 @@ const SignUp = () => {
   });
   const handleClick = async () => {
     try {
-      if (
-        registerTeam.password === registerTeam.confirmPassword &&
-        registerTeam.confirmPassword !== '' &&
-        registerTeam.password !== ''
-      ) {
+      if (registerTeam.password === registerTeam.confirmPassword) {
         if (registerTeam.username !== '' && registerTeam.mail !== '') {
-          setCheckedPassword(true);
           Alert.alert('Register Succesfly');
+
+          const requestObject = {
+            username: registerTeam.username,
+            password: registerTeam.password,
+            mail: registerTeam.mail,
+          };
+          console.log('value', requestObject);
+          const response = await axios.post(
+            'http://10.0.2.2:3000/register',
+            requestObject,
+          );
+
+          console.log(response.data);
         }
       } else {
         Alert.alert('Password dosent match');
       }
-      await axios.post('http://10.110.213.66:9090/users/addUser', registerTeam);
     } catch (error) {
       console.warn(error);
     }
@@ -104,7 +111,7 @@ const SignUp = () => {
       </View>
       <CustomButton
         title={'Sign Up'}
-        disabled={!checked && checkedPassword}
+        disabled={!checked}
         onPress={() => {
           handleClick();
         }}
