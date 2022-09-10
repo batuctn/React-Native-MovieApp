@@ -2,28 +2,37 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import HomeScreen from '../screens/HomeScreen';
-import SearchScreen from '../screens/SearchScreen';
+import {useSelector} from 'react-redux';
+import HomeScreen from '../screens/Home/HomeScreen';
+
+import SearchScreen from '../screens/SearchScreen/SearchScreen';
+
 import ProfileStackNavigation from './ProfileStackNavigation';
 const BottomTabs = createBottomTabNavigator();
 
 const BottomNavigator = () => {
+  const theme = useSelector(state => state.theme.activeTheme);
   return (
-    <BottomTabs.Navigator initialRouteName="Home">
+    <BottomTabs.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        tabBarLabelStyle: {color: theme === 'light' ? '#900' : '#9c9c9c'},
+      }}>
       <BottomTabs.Screen
         name="Home"
         component={HomeScreen}
         options={{
+          headerShown: false,
           tabBarStyle: {
             borderTopWidth: 0,
             borderTopColor: 'transparent',
           },
           headerShadowVisible: false,
           tabBarLabel: 'Movies',
-          tabBarIcon: ({color, size, focused}) => (
+          tabBarIcon: ({size, focused}) => (
             <MaterialCommunityIcons
               name={`movie-star${focused ? '' : '-outline'}`}
-              color={color}
+              color={theme === 'light' ? '#900' : '#9c9c9c'}
               size={size + 5}
             />
           ),
@@ -33,16 +42,17 @@ const BottomNavigator = () => {
         name="Search"
         component={SearchScreen}
         options={{
+          headerShown: false,
           tabBarStyle: {
             borderTopWidth: 0,
             borderTopColor: 'transparent',
           },
           headerShadowVisible: false,
           tabBarLabel: 'Search',
-          tabBarIcon: ({color, size, focused}) => (
+          tabBarIcon: ({size, focused}) => (
             <Ionicons
-              name={`chatbubbles${focused ? '' : '-outline'}`}
-              color={color}
+              name={`search${focused ? '' : '-outline'}`}
+              color={theme === 'light' ? '#900' : '#9c9c9c'}
               size={size + 5}
             />
           ),
@@ -59,10 +69,10 @@ const BottomNavigator = () => {
           headerShown: false,
           headerShadowVisible: false,
           tabBarLabel: 'Profile',
-          tabBarIcon: ({color, size, focused}) => (
+          tabBarIcon: ({size, focused}) => (
             <Ionicons
               name={`settings${focused ? '' : '-outline'}`}
-              color={color}
+              color={theme === 'light' ? '#900' : '#9c9c9c'}
               size={size + 5}
             />
           ),

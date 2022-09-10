@@ -1,6 +1,6 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import MovieDetails from '../screens/MovieDetails';
+import MovieDetails from '../screens/MovieDetails/MovieDetails';
 import BottomNavigator from './BottomNavigator';
 
 const MovieNavigaiton = () => {

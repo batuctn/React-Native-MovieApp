@@ -1,13 +1,24 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Profile from '../screens/Profile';
-import EditProfile from '../screens/EditProfile';
-import Theme from '../screens/Theme';
+import Profile from '../screens/Profile/Profile';
+
+import {useSelector} from 'react-redux';
+import EditProfile from '../screens/EditProfile/EditProfile';
+import Theme from '../screens/Theme/Theme';
 
 const Stack = createNativeStackNavigator();
 const ProfileStackNavigation = () => {
+  const theme = useSelector(state => state.theme.activeTheme);
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: theme === 'light' ? null : '#363636',
+        },
+        headerTitleStyle: {
+          color: theme === 'light' ? '#900' : '#cfcfcf',
+        },
+      }}>
       <Stack.Screen
         options={{
           headerShown: false,
