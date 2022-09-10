@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
 import React from 'react';
 import {TextInput} from 'react-native-paper';
+import {useSelector} from 'react-redux';
 
 const CustomInput = ({
   value,
@@ -12,16 +13,16 @@ const CustomInput = ({
   secureTextEntry,
   right,
 }) => {
+  const theme = useSelector(state => state.theme.activeTheme);
   return (
     <TextInput
       mode="outlined"
-      activeOutlineColor="#3390ec"
-      outlineColor="#dfe1e5"
+      activeOutlineColor="#dfe1e5"
+      outlineColor="#900"
       label={label}
       value={value}
       onChangeText={onChangeText}
-      maxLength={10}
-      style={styles.textInput}
+      style={theme === 'light' ? styles.textInput : styles.textInput_dark}
       left={left}
       disabled={disabled}
       placeholder={placeholder}
@@ -38,5 +39,11 @@ const styles = StyleSheet.create({
     width: '90%',
     borderRadius: 15,
     margin: 5,
+  },
+  textInput_dark: {
+    width: '90%',
+    borderRadius: 15,
+    margin: 5,
+    backgroundColor: '#d3d3d3',
   },
 });

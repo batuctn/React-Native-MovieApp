@@ -4,7 +4,12 @@ import React from 'react';
 const CustomButton = ({title, onPress, disabled}) => {
   return (
     <View style={styles.button}>
-      <Button title={title} onPress={onPress} disabled={disabled} />
+      <Button
+        title={title}
+        onPress={onPress}
+        disabled={disabled}
+        color={'gray'}
+      />
     </View>
   );
 };
