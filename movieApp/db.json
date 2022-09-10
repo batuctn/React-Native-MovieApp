@@ -1,0 +1,29 @@
+{
+  "register": [
+    {
+      "username": "batuccc",
+      "password": "12334",
+      "mail": "batuccc",
+      "id": 1
+    },
+    {
+      "username": "büsra",
+      "password": "1235",
+      "mail": "busradnasddsd",
+      "id": 2
+    },
+    {
+      "username": "23",
+      "password": "23",
+      "mail": "busradnasddsd",
+      "id": 2
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ]
+}
