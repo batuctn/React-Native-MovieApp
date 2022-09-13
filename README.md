@@ -17,6 +17,7 @@
 
 > Movie App- Movie List and movie details screens lay out.This project created React Native CLI.
 > Even if you've never worked with React Redux before, you're in the right place.
+> Services Apı https://developers.themoviedb.org/3
 
 
 
